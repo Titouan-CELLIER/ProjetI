@@ -8,6 +8,7 @@ import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -55,13 +56,14 @@ public class ManagerRequest extends AppCompatActivity {
 
            @Override
            public void onResponse(Call call, Response response) throws IOException {
-               try {
-                   JSONObject json =  new JSONObject(String.valueOf(response));
-                   Log.i("device",""+json.toString());
-               } catch (JSONException e) {
-                   e.printStackTrace();
-                   Log.i("device",""+e);
-               }
+               final String myResponse = response.body().string();
+              try{
+               JSONObject json = new JSONObject(myResponse);
+               Log.i("device",""+json);
+                  System.out.println(json);
+           } catch (JSONException e) {
+               e.printStackTrace();
+           }
 
            }
        });
