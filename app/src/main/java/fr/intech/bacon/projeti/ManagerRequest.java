@@ -14,6 +14,8 @@ import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOError;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Map;
@@ -29,41 +31,36 @@ import okhttp3.ResponseBody;
 public class ManagerRequest extends AppCompatActivity {
 
     private final OkHttpClient client = new OkHttpClient.Builder()
-            .addInterceptor(new StethoInterceptor())
+            //.addInterceptor(new StethoInterceptor())
             .build();
 
 
     public void getDevices() throws IOException {
-        //String idx = "";
+        Log.i("jesuisla","jesuisla");
         Request request = new Request.Builder()
                 // /json.htm?type=devices&filter=light&used=true&order=Name
-                .url("http://192.168.1.32:8080/json.htm?type=devices&filter=light&used=true&order=Name")
+                // TODO : adresse serv variable;
+                .url("http://10.8.110.219:8080/json.htm?type=devices&filter=light&used=true&order=Name")
                 .header("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==")
                 .build();
 
-
-       // Response response = client.newCall(request).execute();
-        //return response.body().string();
-
-
-        //Log.i("clareponse",""+client.newCall(request));
        client.newCall(request).enqueue(new Callback() {
 
            @Override
            public void onFailure(Call call, IOException e) {
+               Log.i("larep", "c fo ");
                e.printStackTrace();
            }
 
            @Override
            public void onResponse(Call call, Response response) throws IOException {
+               Log.i("larep", ""+response.code());
                final String myResponse = response.body().string();
-              try{
-               JSONObject json = new JSONObject(myResponse);
-               Log.i("device",""+json);
-                  System.out.println(json);
-           } catch (JSONException e) {
-               e.printStackTrace();
-           }
+               try{
+                   //ALED
+              } catch (IOError e) {
+                   e.printStackTrace();
+              }
 
            }
        });

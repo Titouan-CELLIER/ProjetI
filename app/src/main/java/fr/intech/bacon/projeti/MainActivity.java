@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.JsonReader;
 import android.util.Log;
 
 import java.io.IOException;
@@ -17,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,10 +41,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Log.i("OUECH","COMPREND PAS");
-
+        //Log.i("OUECH","COMPREND PAS");
+        ManagerRequest request = new ManagerRequest();
         try {
-            run();
+            request.getDevices();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -68,36 +70,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-    }
-
-    void run() throws IOException {
-        OkHttpClient client = new OkHttpClient();
-
-        Request request = new Request.Builder()
-                // /json.htm?type=devices&filter=light&used=true&order=Name
-                .url("http://192.168.1.32:8080/json.htm?type=devices&filter=light&used=true&order=Name")
-                .header("Authorization", "Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==")
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                final String myResponse = response.body().string();
-                try {
-                    JSONObject json = new JSONObject(myResponse);
-                    Log.i("device", "" + json);
-                    System.out.println(json);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 
 
