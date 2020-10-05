@@ -1,23 +1,13 @@
 package fr.intech.bacon.projeti.model;
 
 public class Device {
-    private int idx;
-    private String deviceBody;
+    private String idx;
 
-    public int getIdx() {
+    public String getIdx() {
         return idx;
     }
 
-    public String getDeviceBody() {
-        return deviceBody;
-    }
-
-
-    public void setIdx(int idx) {
+    public void setIdx(String idx) {
         this.idx = idx;
-    }
-
-    public void setDeviceBody(String deviceBody) {
-        this.deviceBody = deviceBody;
     }
 }

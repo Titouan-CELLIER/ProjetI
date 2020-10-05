@@ -4,6 +4,10 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
     defaultConfig {
         applicationId "fr.intech.bacon.projeti"
@@ -33,8 +37,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.9.0'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.2'
-    implementation group: 'com.facebook.stetho', name: 'stetho', version: '1.5.1'
-    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.1'
+
 
 
 }
